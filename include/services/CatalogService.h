@@ -1,0 +1,26 @@
+#ifndef SUPERMARKET_CATALOG_CATALOGSERVICE_H
+#define SUPERMARKET_CATALOG_CATALOGSERVICE_H
+
+struct Product;
+
+class CatalogService {
+public:
+    CatalogService();
+
+    bool addProduct(const Product& product);
+    bool deleteProductByBarcode(const std::string& barcode);
+
+    Product* searchByName(const std::string& name);
+    Product* searchByBarcode(const std::string& barcode);
+    std::vector<Product> searchByCategory(const std::string& category) const;
+    std::vector<Product> searchByExpiryDateRange(const std::string& startDate, const std::string& endDate) const;
+
+    void listProductsByName() const;
+    void compareSearchPerformance() const;
+    void loadFromCSV(const std::string& filePath);
+    void generateTreeVisualizations() const;
+
+    void displayProduct(const Product& product) const;
+};
+
+#endif //SUPERMARKET_CATALOG_CATALOGSERVICE_H
