@@ -1,9 +1,12 @@
 #ifndef SUPERMARKET_CATALOG_CATALOGSERVICE_H
 #define SUPERMARKET_CATALOG_CATALOGSERVICE_H
+#include "../structures/LinkedList.h"
 
 struct Product;
 
 class CatalogService {
+private:
+    LinkedList productList;
 public:
     CatalogService();
 

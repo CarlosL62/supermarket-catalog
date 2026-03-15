@@ -1,29 +1,47 @@
 #include <iostream>
 #include "../../include/services/CatalogService.h"
-
 #include "../../include/models/Product.h"
 
 CatalogService::CatalogService() = default;
 
 bool CatalogService::addProduct(const Product& product) {
+    productList.insert(product);
     std::cout << "Producto agregado correctamente." << std::endl;
     displayProduct(product);
-    return true; // Temporal: all structures implemented here later
+    return true;
 }
 
 bool CatalogService::deleteProductByBarcode(const std::string& barcode) {
-    std::cout << "Eliminar producto por código de barras aún no implementado." << std::endl;
+    bool removed = productList.removeByBarcode(barcode);
+    if (removed) {
+        std::cout << "Produto eliminado correctamente." << std::endl;
+        return true;
+    }
+
+    std::cout << "No se encontró un producto con ese código de barras." << std::endl;
     return false;
 }
 
 Product* CatalogService::searchByName(const std::string& name) {
-    std::cout << "Búsqueda por nombre aún no implementada." << std::endl;
-    return nullptr;
+    Product* foundProduct = productList.searchByName(name);
+
+    if (foundProduct == nullptr) {
+        std::cout << "No se encontró un producto con ese nombre." << std::endl;
+        return nullptr;
+    }
+
+    return foundProduct;
 }
 
 Product* CatalogService::searchByBarcode(const std::string& barcode) {
-    std::cout << "Búsqueda por código de barras aún no implementada." << std::endl;
-    return nullptr;
+    Product* foundProduct = productList.searchByBarcode(barcode);
+
+    if (foundProduct == nullptr) {
+        std::cout << "No se encontró un producto con ese código de barras." << std::endl;
+        return nullptr;
+    }
+
+    return foundProduct;
 }
 
 std::vector<Product> CatalogService::searchByCategory(const std::string& category) const {
@@ -37,7 +55,8 @@ std::vector<Product> CatalogService::searchByExpiryDateRange(const std::string& 
 }
 
 void CatalogService::listProductsByName() const {
-    std::cout << "Listado por nombre aún no implementado." << std::endl;
+    std::cout << "Listado actual desde la lista enlazada no ordenada" << std::endl;
+    productList.display();
 }
 
 void CatalogService::compareSearchPerformance() const {

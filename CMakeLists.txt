@@ -7,4 +7,7 @@ add_executable(supermarket_catalog src/main.cpp
         include/models/Product.h
         include/Services/CatalogService.h
         src/services/CatalogService.cpp
+        include/structures/ListNode.h
+        include/structures/LinkedList.h
+        src/structures/LinkedList.cpp
 )

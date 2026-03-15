@@ -1,6 +1,7 @@
 #include <iostream>
 #include "../include/models/Product.h"
 #include "../include/services/CatalogService.h"
+#include "../include/structures/LinkedList.h"
 
 int main() {
     int option;
@@ -24,29 +25,56 @@ int main() {
 
         switch (option) {
             case 1: {
-                // Example of addition of a product, this will be replaced by user input
-                Product product {
-                    "Milk",
-                    "1234567890123",
-                    "Dairy",
-                    "2024-12-31",
-                    "Brand A",
-                    1.99,
-                    30
-                };
+                Product product;
+
+                std::cout << "Nombre: ";
+                std::cin >> product.name;
+                std::cout << "Código de barras: ";
+                std::cin >> product.barcode;
+                std::cout << "Categoría: ";
+                std::cin >> product.category;
+                std::cout << "Fecha de expiración (YYYY-MM-DD): ";
+                std::cin >> product.expiryDate;
+                std::cout << "Marca: ";
+                std::cin >> product.brand;
+                std::cout << "Precio: ";
+                std::cin >> product.price;
+                std::cout << "Stock: ";
+                std::cin >> product.stock;
 
                 catalogService.addProduct(product);
                 break;
             }
-            case 2:
-                std::cout << "Opcion aun no implementada." << std::endl;
+            case 2: {
+                std::string barcode;
+                std::cout << "Ingrese el código de barras del producto a eliminar: ";
+                std::cin >> barcode;
+
+                catalogService.deleteProductByBarcode(barcode);
                 break;
-            case 3:
-                std::cout << "Opcion aun no implementada." << std::endl;
+            }
+            case 3: {
+                std::string name;
+                std::cout << "Ingrese el nombre del producto a buscar: ";
+                std::cin >> name;
+
+                Product* foundProduct = catalogService.searchByName(name);
+                if (foundProduct != nullptr) {
+                    catalogService.displayProduct(*foundProduct);
+                }
                 break;
-            case 4:
-                std::cout << "Opcion aun no implementada." << std::endl;
+            }
+            case 4: {
+                std::string barcode;
+                std::cout << "Ingrese el código de barras del producto a buscar: ";
+                std::cin >> barcode;
+
+                Product* foundProduct = catalogService.searchByBarcode(barcode);
+                if (foundProduct != nullptr) {
+                    catalogService.displayProduct(*foundProduct);
+                }
                 break;
+            }
             case 5:
                 std::cout << "Opcion aun no implementada." << std::endl;
                 break;
@@ -54,7 +82,7 @@ int main() {
                 std::cout << "Opcion aun no implementada." << std::endl;
                 break;
             case 7:
-                std::cout << "Opcion aun no implementada." << std::endl;
+                catalogService.listProductsByName();
                 break;
             case 8:
                 std::cout << "Opcion aun no implementada." << std::endl;
