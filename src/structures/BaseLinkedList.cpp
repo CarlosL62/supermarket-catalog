@@ -1,9 +1,9 @@
 #include <iostream>
-#include "../../include/structures/LinkedList.h"
+#include "../../include/structures/BaseLinkedList.h"
 
-LinkedList::LinkedList() : head(nullptr) {}
+BaseLinkedList::BaseLinkedList() : head(nullptr) {}
 
-LinkedList::~LinkedList() {
+BaseLinkedList::~BaseLinkedList() {
     ListNode* current = head;
     while (current != nullptr) {
         ListNode* nextNode = current->next;
@@ -12,26 +12,11 @@ LinkedList::~LinkedList() {
     }
 }
 
-bool LinkedList::isEmpty() const {
+bool BaseLinkedList::isEmpty() const {
     return head == nullptr;
 }
 
-void LinkedList::insert(const Product &product) {
-    ListNode* newNode = new ListNode(product);
-
-    if (isEmpty()) {
-        head = newNode;
-        return;
-    }
-
-    ListNode* current = head;
-    while (current->next != nullptr) {
-        current = current->next;
-    }
-    current->next = newNode;
-}
-
-Product *LinkedList::searchByName(const std::string &name) {
+Product *BaseLinkedList::searchByName(const std::string &name) {
     ListNode* current = head;
     while (current != nullptr) {
         if (current->data.name == name) {
@@ -43,7 +28,7 @@ Product *LinkedList::searchByName(const std::string &name) {
     return nullptr;
 }
 
-Product *LinkedList::searchByBarcode(const std::string &barcode) {
+Product *BaseLinkedList::searchByBarcode(const std::string &barcode) {
     ListNode* current = head;
     while (current != nullptr) {
         if (current->data.barcode == barcode) {
@@ -55,7 +40,7 @@ Product *LinkedList::searchByBarcode(const std::string &barcode) {
     return nullptr;
 }
 
-bool LinkedList::removeByBarcode(const std::string &barcode) {
+bool BaseLinkedList::removeByBarcode(const std::string &barcode) {
     if (isEmpty()) {
         return false;
     }
@@ -82,7 +67,7 @@ bool LinkedList::removeByBarcode(const std::string &barcode) {
     return true;
 }
 
-void LinkedList::display() const {
+void BaseLinkedList::display() const {
     if (isEmpty()) {
         std::cout << "La lista está vacía." << std::endl;
         return;

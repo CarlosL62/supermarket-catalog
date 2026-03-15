@@ -8,6 +8,10 @@ add_executable(supermarket_catalog src/main.cpp
         include/Services/CatalogService.h
         src/services/CatalogService.cpp
         include/structures/ListNode.h
-        include/structures/LinkedList.h
-        src/structures/LinkedList.cpp
+        include/structures/UnorderedLinkedList.h
+        src/structures/UnorderedLinkedList.cpp
+        include/structures/BaseLinkedList.h
+        include/structures/OrderedLinkedList.h
+        src/structures/BaseLinkedList.cpp
+        src/structures/OrderedLinkedList.cpp
 )

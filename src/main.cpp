@@ -1,7 +1,7 @@
 #include <iostream>
 #include "../include/models/Product.h"
 #include "../include/services/CatalogService.h"
-#include "../include/structures/LinkedList.h"
+#include "../include/structures/UnorderedLinkedList.h"
 
 int main() {
     int option;

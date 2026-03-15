@@ -1,29 +1,33 @@
 #include <iostream>
 #include "../../include/services/CatalogService.h"
-#include "../../include/models/Product.h"
 
 CatalogService::CatalogService() = default;
 
 bool CatalogService::addProduct(const Product& product) {
-    productList.insert(product);
+    unorderedList.insert(product);
+    orderedList.insert(product);
     std::cout << "Producto agregado correctamente." << std::endl;
     displayProduct(product);
     return true;
 }
 
 bool CatalogService::deleteProductByBarcode(const std::string& barcode) {
-    bool removed = productList.removeByBarcode(barcode);
-    if (removed) {
-        std::cout << "Produto eliminado correctamente." << std::endl;
-        return true;
+    Product* productToDelete = unorderedList.searchByBarcode(barcode);
+
+    if (productToDelete == nullptr) {
+        std::cout << "No se encontró un producto con ese código de barras." << std::endl;
+        return false;
     }
 
-    std::cout << "No se encontró un producto con ese código de barras." << std::endl;
-    return false;
+    unorderedList.removeByBarcode(barcode);
+    orderedList.removeByBarcode(barcode);
+
+    std::cout << "Producto eliminado correctamente." << std::endl;
+    return true;
 }
 
 Product* CatalogService::searchByName(const std::string& name) {
-    Product* foundProduct = productList.searchByName(name);
+    Product* foundProduct = orderedList.searchByName(name);
 
     if (foundProduct == nullptr) {
         std::cout << "No se encontró un producto con ese nombre." << std::endl;
@@ -34,7 +38,7 @@ Product* CatalogService::searchByName(const std::string& name) {
 }
 
 Product* CatalogService::searchByBarcode(const std::string& barcode) {
-    Product* foundProduct = productList.searchByBarcode(barcode);
+    Product* foundProduct = unorderedList.searchByBarcode(barcode);
 
     if (foundProduct == nullptr) {
         std::cout << "No se encontró un producto con ese código de barras." << std::endl;
@@ -55,8 +59,8 @@ std::vector<Product> CatalogService::searchByExpiryDateRange(const std::string& 
 }
 
 void CatalogService::listProductsByName() const {
-    std::cout << "Listado actual desde la lista enlazada no ordenada" << std::endl;
-    productList.display();
+    std::cout << "Listado actual desde la lista enlazada ordenada:" << std::endl;
+    orderedList.display();
 }
 
 void CatalogService::compareSearchPerformance() const {
@@ -77,6 +81,6 @@ void CatalogService::displayProduct(const Product& product) const {
     std::cout << "Categoría: " << product.category << std::endl;
     std::cout << "Fecha de vencimiento: " << product.expiryDate << std::endl;
     std::cout << "Marca: " << product.brand << std::endl;
-    std::cout << "Precio: $" << product.price << std::endl;
+    std::cout << "Precio: Q " << product.price << std::endl;
     std::cout << "Cantidad: " << product.stock << " unidades" << std::endl;
 }

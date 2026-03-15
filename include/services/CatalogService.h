@@ -1,12 +1,12 @@
 #ifndef SUPERMARKET_CATALOG_CATALOGSERVICE_H
 #define SUPERMARKET_CATALOG_CATALOGSERVICE_H
-#include "../structures/LinkedList.h"
-
-struct Product;
+#include "../structures/UnorderedLinkedList.h"
+#include "../structures/OrderedLinkedList.h"
 
 class CatalogService {
 private:
-    LinkedList productList;
+    UnorderedLinkedList unorderedList;
+    OrderedLinkedList orderedList;
 public:
     CatalogService();
 
