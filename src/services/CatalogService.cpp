@@ -6,6 +6,7 @@ CatalogService::CatalogService() = default;
 bool CatalogService::addProduct(const Product& product) {
     unorderedList.insert(product);
     orderedList.insert(product);
+    hashTable.insert(product);
     std::cout << "Producto agregado correctamente." << std::endl;
     displayProduct(product);
     return true;
@@ -21,6 +22,7 @@ bool CatalogService::deleteProductByBarcode(const std::string& barcode) {
 
     unorderedList.removeByBarcode(barcode);
     orderedList.removeByBarcode(barcode);
+    hashTable.remove(barcode);
 
     std::cout << "Producto eliminado correctamente." << std::endl;
     return true;
@@ -38,7 +40,7 @@ Product* CatalogService::searchByName(const std::string& name) {
 }
 
 Product* CatalogService::searchByBarcode(const std::string& barcode) {
-    Product* foundProduct = unorderedList.searchByBarcode(barcode);
+    Product* foundProduct = hashTable.search(barcode);
 
     if (foundProduct == nullptr) {
         std::cout << "No se encontró un producto con ese código de barras." << std::endl;

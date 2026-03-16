@@ -14,4 +14,6 @@ add_executable(supermarket_catalog src/main.cpp
         include/structures/OrderedLinkedList.h
         src/structures/BaseLinkedList.cpp
         src/structures/OrderedLinkedList.cpp
+        include/structures/HashTable.h
+        src/structures/HashTable.cpp
 )

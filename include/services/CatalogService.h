@@ -1,5 +1,6 @@
 #ifndef SUPERMARKET_CATALOG_CATALOGSERVICE_H
 #define SUPERMARKET_CATALOG_CATALOGSERVICE_H
+#include "../structures/HashTable.h"
 #include "../structures/UnorderedLinkedList.h"
 #include "../structures/OrderedLinkedList.h"
 
@@ -7,6 +8,7 @@ class CatalogService {
 private:
     UnorderedLinkedList unorderedList;
     OrderedLinkedList orderedList;
+    HashTable hashTable;
 public:
     CatalogService();
 
