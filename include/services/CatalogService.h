@@ -1,14 +1,16 @@
 #ifndef SUPERMARKET_CATALOG_CATALOGSERVICE_H
 #define SUPERMARKET_CATALOG_CATALOGSERVICE_H
-#include "../structures/HashTable.h"
 #include "../structures/UnorderedLinkedList.h"
 #include "../structures/OrderedLinkedList.h"
+#include "../structures/HashTable.h"
+#include "../structures/AVLTree.h"
 
 class CatalogService {
 private:
     UnorderedLinkedList unorderedList;
     OrderedLinkedList orderedList;
     HashTable hashTable;
+    AVLTree avlTree;
 public:
     CatalogService();
 

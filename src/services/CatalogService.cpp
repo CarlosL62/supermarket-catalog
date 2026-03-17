@@ -7,6 +7,7 @@ bool CatalogService::addProduct(const Product& product) {
     unorderedList.insert(product);
     orderedList.insert(product);
     hashTable.insert(product);
+    avlTree.insert(product);
     std::cout << "Producto agregado correctamente." << std::endl;
     displayProduct(product);
     return true;
@@ -29,7 +30,7 @@ bool CatalogService::deleteProductByBarcode(const std::string& barcode) {
 }
 
 Product* CatalogService::searchByName(const std::string& name) {
-    Product* foundProduct = orderedList.searchByName(name);
+    Product* foundProduct = avlTree.search(name);
 
     if (foundProduct == nullptr) {
         std::cout << "No se encontró un producto con ese nombre." << std::endl;
@@ -61,8 +62,8 @@ std::vector<Product> CatalogService::searchByExpiryDateRange(const std::string& 
 }
 
 void CatalogService::listProductsByName() const {
-    std::cout << "Listado actual desde la lista enlazada ordenada:" << std::endl;
-    orderedList.display();
+    std::cout << "Listado actual desde el árbol AVL:" << std::endl;
+    avlTree.inorderTraversal();
 }
 
 void CatalogService::compareSearchPerformance() const {

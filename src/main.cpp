@@ -6,6 +6,15 @@ int main() {
     int option;
     CatalogService catalogService;
 
+    //TEST
+    Product p1 = {"Milk", "123", "Dairy", "2026-01-01", "BrandA", 10.5, 20};
+    Product p2 = {"Bread", "456", "Bakery", "2026-01-02", "BrandB", 5.0, 30};
+    Product p3 = {"Apple", "789", "Fruits", "2026-01-03", "BrandC", 3.0, 50};
+
+    catalogService.addProduct(p1);
+    catalogService.addProduct(p2);
+    catalogService.addProduct(p3);
+
     do {
         std::cout << "\n===== SISTEMA DE CATALOGO DE SUPERMERCADO =====" << std::endl;
         std::cout << "1. Agregar producto" << std::endl;

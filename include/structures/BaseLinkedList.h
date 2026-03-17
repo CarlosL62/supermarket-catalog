@@ -1,12 +1,17 @@
 #ifndef SUPERMARKET_CATALOG_BASELINKEDLIST_H
 #define SUPERMARKET_CATALOG_BASELINKEDLIST_H
 
-#include "ListNode.h"
+#include "../models/Product.h"
 
 class BaseLinkedList {
 protected:
-    ListNode* head;
+    struct ListNode {
+        Product data;
+        ListNode* next;
 
+        ListNode(const Product& product) : data(product), next(nullptr) {}
+    };
+    ListNode* head;
 public:
     BaseLinkedList();
     virtual ~BaseLinkedList();

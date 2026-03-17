@@ -7,7 +7,6 @@ add_executable(supermarket_catalog src/main.cpp
         include/models/Product.h
         include/Services/CatalogService.h
         src/services/CatalogService.cpp
-        include/structures/ListNode.h
         include/structures/UnorderedLinkedList.h
         src/structures/UnorderedLinkedList.cpp
         include/structures/BaseLinkedList.h
@@ -16,4 +15,6 @@ add_executable(supermarket_catalog src/main.cpp
         src/structures/OrderedLinkedList.cpp
         include/structures/HashTable.h
         src/structures/HashTable.cpp
+        include/structures/AVLTree.h
+        src/structures/AVLTree.cpp
 )
