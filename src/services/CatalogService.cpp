@@ -72,7 +72,16 @@ void CatalogService::compareSearchPerformance() const {
 }
 
 void CatalogService::loadFromCSV(const std::string& filePath) {
-    std::cout << "Carga desde CSV aún no implementada." << std::endl;
+    // Load products from CSV using CSVLoader
+    std::vector<Product> products = CSVLoader::loadProducts(filePath);
+
+    // Insert each product into all structures
+    for (const Product& product : products) {
+        addProduct(product);
+    }
+
+    std::cout << "Productos cargados desde CSV correctamente." << std::endl;
+    std::cout << "Total de productos cargados: " << products.size() << std::endl;
 }
 
 void CatalogService::generateTreeVisualizations() const {

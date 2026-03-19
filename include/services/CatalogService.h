@@ -1,5 +1,6 @@
 #ifndef SUPERMARKET_CATALOG_CATALOGSERVICE_H
 #define SUPERMARKET_CATALOG_CATALOGSERVICE_H
+#include "../utils/CSVLoader.h"
 #include "../structures/UnorderedLinkedList.h"
 #include "../structures/OrderedLinkedList.h"
 #include "../structures/HashTable.h"

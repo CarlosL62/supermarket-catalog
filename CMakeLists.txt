@@ -17,4 +17,6 @@ add_executable(supermarket_catalog src/main.cpp
         src/structures/HashTable.cpp
         include/structures/AVLTree.h
         src/structures/AVLTree.cpp
+        include/utils/CSVLoader.h
+        src/utils/CSVLoader.cpp
 )

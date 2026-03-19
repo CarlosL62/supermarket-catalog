@@ -1,0 +1,8 @@
+Nombre,CodigoBarra,Categoria,FechaCaducidad,Marca,Precio,Stock
+Leche,1234567890123,Lacteos,2026-01-15,LaVaquita,12.50,20
+Pan,9876543210000,Panaderia,2026-01-10,Bimbo,8.00,35
+Manzana,5555555555555,Frutas,2026-01-20,DelCampo,3.25,50
+Queso,1112223334445,Lacteos,2026-02-01,Cremoso,25.75,10
+Arroz,9998887776661,Granos,2027-05-30,ElBuenArroz,15.00,40
+Frijol,2223334445556,Granos,2027-06-15,LaMilpa,14.50,30
+Jugo,3334445556667,Bebidas,2026-03-01,DelValle,10.00,25

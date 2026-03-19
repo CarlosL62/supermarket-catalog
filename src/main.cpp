@@ -86,9 +86,14 @@ int main() {
             case 8:
                 std::cout << "Opcion aun no implementada." << std::endl;
                 break;
-            case 9:
-                std::cout << "Opcion aun no implementada." << std::endl;
+            case 9: {
+                std::string filePath;
+                std::cout << "Ingrese la ruta del archivo CSV: ";
+                std::cin >> filePath;
+
+                catalogService.loadFromCSV(filePath);
                 break;
+            }
             case 10:
                 std::cout << "Opcion aun no implementada." << std::endl;
                 break;
