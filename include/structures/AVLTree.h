@@ -22,12 +22,17 @@ private:
     int getBalanceFactor(AVLNode* node);
 
     AVLNode* search(AVLNode* node, const std::string& name);
+    AVLNode* remove(AVLNode* node, const std::string& name);
+    AVLNode* minValueNode(AVLNode* node);
     void inorderTraversal(AVLNode* node) const;
+    void destroyTree(AVLNode* node);
 public:
     AVLTree();
+    ~AVLTree();
 
     void insert(const Product& product);
     Product* search(const std::string& name);
+    void remove(const std::string& name);
     void inorderTraversal() const;
 };
 

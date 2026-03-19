@@ -9,12 +9,12 @@ bool CatalogService::addProduct(const Product& product) {
     hashTable.insert(product);
     avlTree.insert(product);
     std::cout << "Producto agregado correctamente." << std::endl;
-    displayProduct(product);
+    // displayProduct(product);
     return true;
 }
 
 bool CatalogService::deleteProductByBarcode(const std::string& barcode) {
-    Product* productToDelete = unorderedList.searchByBarcode(barcode);
+    Product* productToDelete = hashTable.search(barcode);
 
     if (productToDelete == nullptr) {
         std::cout << "No se encontró un producto con ese código de barras." << std::endl;
@@ -23,6 +23,7 @@ bool CatalogService::deleteProductByBarcode(const std::string& barcode) {
 
     unorderedList.removeByBarcode(barcode);
     orderedList.removeByBarcode(barcode);
+    avlTree.remove(productToDelete->name);
     hashTable.remove(barcode);
 
     std::cout << "Producto eliminado correctamente." << std::endl;

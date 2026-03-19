@@ -4,6 +4,20 @@
 
 AVLTree::AVLTree() : root(nullptr) {}
 
+void AVLTree::destroyTree(AVLNode* node) {
+    if (node == nullptr) {
+        return;
+    }
+
+    destroyTree(node->left);
+    destroyTree(node->right);
+    delete node;
+}
+
+AVLTree::~AVLTree() {
+    destroyTree(root);
+}
+
 int AVLTree::getHeight(AVLNode* node) {
     if (node == nullptr) {
         return 0;
@@ -117,6 +131,85 @@ Product* AVLTree::search(const std::string& name) {
     return &foundNode->data;
 }
 
+AVLTree::AVLNode* AVLTree::minValueNode(AVLNode* node) {
+    AVLNode* current = node;
+
+    while (current != nullptr && current->left != nullptr) {
+        current = current->left;
+    }
+
+    return current;
+}
+
+AVLTree::AVLNode* AVLTree::remove(AVLNode* node, const std::string& name) {
+    if (node == nullptr) {
+        return nullptr;
+    }
+
+    if (name < node->data.name) {
+        node->left = remove(node->left, name);
+    } else if (name > node->data.name) {
+        node->right = remove(node->right, name);
+    } else {
+        // The node to delete has been found
+
+        // Check if the node does not have any children (leaf node)
+        if (node->left == nullptr && node->right == nullptr) {
+            delete node;
+            return nullptr;
+        }
+        // Check if the node has only one right child
+        if (node->left == nullptr) {
+            AVLNode* temp = node->right;
+            delete node;
+            return temp;
+        }
+        // Check if the node has only one left child
+        if (node->right == nullptr) {
+            AVLNode* temp = node->left;
+            delete node;
+            return temp;
+        }
+
+        // The node has two children, find the in-order successor (smallest in the right subtree)
+        AVLNode* successor = minValueNode(node->right);
+        node->data = successor->data;
+        node->right = remove(node->right, successor->data.name);
+    }
+
+    // Set the new height and balance
+    node->height = 1 + std::max(getHeight(node->left), getHeight(node->right));
+    int balance = getBalanceFactor(node);
+
+    // Right Right case
+    if (balance > 1 && getBalanceFactor(node->right) >= 0) {
+        return rotateLeft(node);
+    }
+
+    // Right Left case
+    if (balance > 1 && getBalanceFactor(node->right) < 0) {
+        node->right = rotateRight(node->right);
+        return rotateLeft(node);
+    }
+
+    // Left Left case
+    if (balance < -1 && getBalanceFactor(node->left) <= 0) {
+        return rotateRight(node);
+    }
+
+    //Left Right case
+    if (balance < -1 && getBalanceFactor(node->left) > 0) {
+        node->left = rotateLeft(node->left);
+        return rotateRight(node);
+    }
+
+    return node;
+}
+
+void AVLTree::remove(const std::string &name) {
+    root = remove(root, name);
+}
+
 void AVLTree::inorderTraversal(AVLNode *node) const {
     if (node == nullptr) {
         return;
@@ -127,6 +220,7 @@ void AVLTree::inorderTraversal(AVLNode *node) const {
     std::cout << "Nombre: " << node->data.name << std::endl;
     std::cout << "Código de barras: " << node->data.barcode << std::endl;
     std::cout << "Categoría: " << node->data.category << std::endl;
+    std::cout << "Fecha de expiración: " << node->data.expiryDate << std::endl;
     std::cout << "Marca: " << node->data.brand << std::endl;
     std::cout << "Precio: " << node->data.price << std::endl;
     std::cout << "Stock: " << node->data.stock << std::endl;
