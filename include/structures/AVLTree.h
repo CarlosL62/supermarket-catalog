@@ -1,6 +1,7 @@
 #ifndef SUPERMARKET_CATALOG_AVLTREE_H
 #define SUPERMARKET_CATALOG_AVLTREE_H
 #include "../models/Product.h"
+#include <fstream>
 
 class AVLTree {
 private:
@@ -26,6 +27,9 @@ private:
     AVLNode* minValueNode(AVLNode* node);
     void inorderTraversal(AVLNode* node) const;
     void destroyTree(AVLNode* node);
+
+    void generateDotNodes(std::ofstream& file, AVLNode* node) const;
+    void generateDotEdges(std::ofstream& file, AVLNode* node) const;
 public:
     AVLTree();
     ~AVLTree();
@@ -34,6 +38,8 @@ public:
     Product* search(const std::string& name);
     void remove(const std::string& name);
     void inorderTraversal() const;
+
+    void generateDotFile(const std::string& filePath) const;
 };
 
 

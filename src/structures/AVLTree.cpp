@@ -1,6 +1,7 @@
 #include "../../include/structures/AVLTree.h"
 
 #include <iostream>
+#include <filesystem>
 
 AVLTree::AVLTree() : root(nullptr) {}
 
@@ -231,4 +232,73 @@ void AVLTree::inorderTraversal(AVLNode *node) const {
 
 void AVLTree::inorderTraversal() const {
     inorderTraversal(root);
+}
+
+void AVLTree::generateDotNodes(std::ofstream &file, AVLNode *node) const {
+    if (node == nullptr) {
+        return;
+    }
+
+    file << "    \"" << node->data.name << "\" [label=\""
+        << node->data.name << "\"];" << std::endl;
+
+    generateDotNodes(file, node->left);
+    generateDotNodes(file, node->right);
+}
+
+
+void AVLTree::generateDotEdges(std::ofstream &file, AVLNode *node) const {
+    if (node == nullptr) {
+        return;
+    }
+
+    if (node->left != nullptr) {
+        file << "    \"" << node->data.name << "\"->\""
+            << node->left->data.name << "\";" << std::endl;
+    }
+
+    if (node->right != nullptr) {
+        file << "    \"" << node->data.name << "\"->\""
+            << node->right->data.name << "\";" << std::endl;
+    }
+
+    generateDotEdges(file, node->left);
+    generateDotEdges(file, node->right);
+}
+
+void AVLTree::generateDotFile(const std::string &filePath) const {
+    // Ensure directory exists
+    std::filesystem::path path(filePath);
+    std::filesystem::create_directories(path.parent_path());
+
+    std::ofstream file(filePath);
+
+    if (!file.is_open()) {
+        std::cout << "No se pudo crear el archivo DOT." << std::endl;
+        return;
+    }
+
+    file << "digraph AVLTree {" << std::endl;
+    file << "    node [shape=circle];" << std::endl;
+
+    if (root != nullptr) {
+        generateDotNodes(file, root);
+        generateDotEdges(file, root);
+    }
+
+    file << "}" << std::endl;
+    file.close();
+
+    // Generate PNG using Graphviz
+    std::string pngPath = filePath.substr(0, filePath.find_last_of('.')) + ".png";
+    std::string command = "dot -Tpng " + filePath + " -o " + pngPath;
+    system(command.c_str());
+
+    int result = system(command.c_str());
+
+    if (result != 0) {
+        std::cout << "Generación fallida del PNG AVL_Tree. Asegurese de tener instalado Graphviz" << std::endl;
+    } else {
+        std::cout << "Generación exitosa del PNG AVL_Tree en: " << pngPath << std::endl;
+    }
 }

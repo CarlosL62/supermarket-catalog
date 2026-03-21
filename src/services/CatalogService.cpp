@@ -85,7 +85,7 @@ void CatalogService::loadFromCSV(const std::string& filePath) {
 }
 
 void CatalogService::generateTreeVisualizations() const {
-    std::cout << "Visualización de árboles aún no implementada." << std::endl;
+    avlTree.generateDotFile("../data/avl_tree.dot");
 }
 
 void CatalogService::displayProduct(const Product& product) const {

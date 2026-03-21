@@ -95,7 +95,7 @@ int main() {
                 break;
             }
             case 10:
-                std::cout << "Opcion aun no implementada." << std::endl;
+                catalogService.generateTreeVisualizations();
                 break;
             case 0:
                 std::cout << "Saliendo del sistema..." << std::endl;
