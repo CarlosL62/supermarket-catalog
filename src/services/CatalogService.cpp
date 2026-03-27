@@ -87,6 +87,7 @@ void CatalogService::loadFromCSV(const std::string& filePath) {
 
 void CatalogService::generateTreeVisualizations() const {
     avlTree.generateDotFile("../data/avl_tree.dot");
+    bTree.generateDotFile("../data/b_tree.dot");
 }
 
 void CatalogService::displayProduct(const Product& product) const {

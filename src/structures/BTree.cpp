@@ -1,4 +1,6 @@
 #include "../../include/structures/BTree.h"
+#include <filesystem>
+#include <iostream>
 
 BTree::BTreeNode::BTreeNode(bool leaf) : isLeaf(leaf) {}
 
@@ -230,4 +232,82 @@ void BTree::remove(BTreeNode* node, const std::string& expiryDate) {
 // Public remove entry point
 void BTree::remove(const std::string& expiryDate) {
     remove(root, expiryDate);
+}
+
+// Generate DOT nodes for the current B-Tree
+void BTree::generateDotNodes(std::ofstream& file, BTreeNode* node) const {
+    if (node == nullptr) {
+        return;
+    }
+
+    std::string nodeId = "node" + std::to_string(reinterpret_cast<std::uintptr_t>(node));
+
+    file << "    " << nodeId << " [shape=record, label=\"";
+
+    for (size_t i = 0; i < node->keys.size(); i++) {
+        file << node->keys[i].expiryDate;
+        if (i + 1 < node->keys.size()) {
+            file << " | ";
+        }
+    }
+
+    file << "\"];" << std::endl;
+
+    for (BTreeNode* child : node->children) {
+        generateDotNodes(file, child);
+    }
+}
+
+// Generate parent-child edges for the current B-Tree
+void BTree::generateDotEdges(std::ofstream& file, BTreeNode* node) const {
+    if (node == nullptr) {
+        return;
+    }
+
+    std::string parentId = "node" + std::to_string(reinterpret_cast<std::uintptr_t>(node));
+
+    for (BTreeNode* child : node->children) {
+        if (child != nullptr) {
+            std::string childId = "node" + std::to_string(reinterpret_cast<std::uintptr_t>(child));
+            file << "    " << parentId << " -> " << childId << ";" << std::endl;
+        }
+    }
+
+    for (BTreeNode* child : node->children) {
+        generateDotEdges(file, child);
+    }
+}
+
+// Export the current B-Tree to DOT and PNG
+void BTree::generateDotFile(const std::string& filePath) const {
+    std::filesystem::path path(filePath);
+    std::filesystem::create_directories(path.parent_path());
+
+    std::ofstream file(filePath);
+
+    if (!file.is_open()) {
+        std::cout << "No se pudo crear el archivo DOT para B_Tree." << std::endl;
+        return;
+    }
+
+    file << "digraph BTree {" << std::endl;
+    file << "    node [fontname=\"Arial\"];" << std::endl;
+
+    if (root != nullptr) {
+        generateDotNodes(file, root);
+        generateDotEdges(file, root);
+    }
+
+    file << "}" << std::endl;
+    file.close();
+
+    std::string pngPath = filePath.substr(0, filePath.find_last_of('.')) + ".png";
+    std::string command = "dot -Tpng \"" + filePath + "\" -o \"" + pngPath + "\"";
+    int result = system(command.c_str());
+
+    if (result != 0) {
+        std::cout << "Generación fallida del PNG B_Tree. Asegurese de tener instalado Graphviz" << std::endl;
+    } else {
+        std::cout << "Generación exitosa del PNG B_Tree en: " << pngPath << std::endl;
+    }
 }

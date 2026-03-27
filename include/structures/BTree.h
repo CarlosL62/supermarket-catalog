@@ -2,6 +2,7 @@
 #define SUPERMARKET_CATALOG_BTREE_H
 
 #include <vector>
+#include <fstream>
 #include "../models/Product.h"
 
 class BTree {
@@ -24,6 +25,8 @@ private:
     void remove(BTreeNode* node, const std::string& expiryDate);
     Product getSuccessor(BTreeNode* node, int index);
     void destroyTree(BTreeNode* node);
+    void generateDotNodes(std::ofstream& file, BTreeNode* node) const;
+    void generateDotEdges(std::ofstream& file, BTreeNode* node) const;
 public:
     BTree(int degree = 2);
     ~BTree();
@@ -32,6 +35,7 @@ public:
     std::vector<Product> searchByRange(const std::string& startDate, const std::string& endDate) const;
     void insert(const Product& product);
     void remove(const std::string& expiryDate);
+    void generateDotFile(const std::string& filePath) const;
 };
 
 #endif //SUPERMARKET_CATALOG_BTREE_H
