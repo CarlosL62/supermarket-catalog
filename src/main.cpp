@@ -77,8 +77,25 @@ int main() {
             case 5:
                 std::cout << "Opcion aun no implementada." << std::endl;
                 break;
-            case 6:
-                std::cout << "Opcion aun no implementada." << std::endl;
+            case 6: {
+                std::string startDate, endDate;
+                std::cout << "Ingrese fecha de inicio (YYYY-MM-DD): ";
+                std::cin >> startDate;
+
+                std::cout << "Ingrese fecha de fin (YYYY-MM-DD): ";
+                std::cin >> endDate;
+
+                std::vector<Product> results = catalogService.searchByExpiryDateRange(startDate, endDate);
+
+                if (results.empty()) {
+                    std::cout << "No se encontraron productos en ese rango." << std::endl;
+                } else {
+                    std::cout << "\nProductos encontrados:" << std::endl;
+                    for (const Product& product : results) {
+                        catalogService.displayProduct(product);
+                    }
+                }
+            }
                 break;
             case 7:
                 catalogService.listProductsByName();

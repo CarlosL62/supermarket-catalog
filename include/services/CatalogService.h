@@ -5,6 +5,7 @@
 #include "../structures/OrderedLinkedList.h"
 #include "../structures/HashTable.h"
 #include "../structures/AVLTree.h"
+#include "../structures/BTree.h"
 
 class CatalogService {
 private:
@@ -12,6 +13,7 @@ private:
     OrderedLinkedList orderedList;
     HashTable hashTable;
     AVLTree avlTree;
+    BTree bTree;
 public:
     CatalogService();
 

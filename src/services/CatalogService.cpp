@@ -8,6 +8,7 @@ bool CatalogService::addProduct(const Product& product) {
     orderedList.insert(product);
     hashTable.insert(product);
     avlTree.insert(product);
+    bTree.insert(product);
     std::cout << "Producto agregado correctamente." << std::endl;
     // displayProduct(product);
     return true;
@@ -24,6 +25,7 @@ bool CatalogService::deleteProductByBarcode(const std::string& barcode) {
     unorderedList.removeByBarcode(barcode);
     orderedList.removeByBarcode(barcode);
     avlTree.remove(productToDelete->name);
+    bTree.remove(productToDelete->expiryDate);
     hashTable.remove(barcode);
 
     std::cout << "Producto eliminado correctamente." << std::endl;
@@ -58,8 +60,7 @@ std::vector<Product> CatalogService::searchByCategory(const std::string& categor
 }
 
 std::vector<Product> CatalogService::searchByExpiryDateRange(const std::string& startDate, const std::string& endDate) const {
-    std::cout << "Búsqueda por rango de fechas aún no implementada." << std::endl;
-    return {};
+    return bTree.searchByRange(startDate, endDate);
 }
 
 void CatalogService::listProductsByName() const {
