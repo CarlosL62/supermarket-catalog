@@ -6,6 +6,7 @@
 #include "../structures/HashTable.h"
 #include "../structures/AVLTree.h"
 #include "../structures/BTree.h"
+#include "../structures/BPlusTree.h"
 
 class CatalogService {
 private:
@@ -14,6 +15,7 @@ private:
     HashTable hashTable;
     AVLTree avlTree;
     BTree bTree;
+    BPlusTree bPlusTree;
 public:
     CatalogService();
 

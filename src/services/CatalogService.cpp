@@ -9,6 +9,7 @@ bool CatalogService::addProduct(const Product& product) {
     hashTable.insert(product);
     avlTree.insert(product);
     bTree.insert(product);
+    bPlusTree.insert(product);
     std::cout << "Producto agregado correctamente." << std::endl;
     // displayProduct(product);
     return true;
@@ -26,6 +27,7 @@ bool CatalogService::deleteProductByBarcode(const std::string& barcode) {
     orderedList.removeByBarcode(barcode);
     avlTree.remove(productToDelete->name);
     bTree.remove(productToDelete->expiryDate);
+    bPlusTree.remove(*productToDelete);
     hashTable.remove(barcode);
 
     std::cout << "Producto eliminado correctamente." << std::endl;
@@ -55,8 +57,7 @@ Product* CatalogService::searchByBarcode(const std::string& barcode) {
 }
 
 std::vector<Product> CatalogService::searchByCategory(const std::string& category) const {
-    std::cout << "Búsqueda por categoría aún no implementada." << std::endl;
-    return {};
+    return bPlusTree.search(category);
 }
 
 std::vector<Product> CatalogService::searchByExpiryDateRange(const std::string& startDate, const std::string& endDate) const {
@@ -88,6 +89,7 @@ void CatalogService::loadFromCSV(const std::string& filePath) {
 void CatalogService::generateTreeVisualizations() const {
     avlTree.generateDotFile("../data/avl_tree.dot");
     bTree.generateDotFile("../data/b_tree.dot");
+    bPlusTree.generateDotFile("../data/b_plus_tree.dot");
 }
 
 void CatalogService::displayProduct(const Product& product) const {

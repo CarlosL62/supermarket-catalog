@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 #include "../include/models/Product.h"
 #include "../include/services/CatalogService.h"
 
@@ -74,9 +75,24 @@ int main() {
                 }
                 break;
             }
-            case 5:
-                std::cout << "Opcion aun no implementada." << std::endl;
+            case 5: {
+                std::string category;
+                std::cout << "Ingrese la categoria a buscar: ";
+                std::cin >> category;
+
+                std::vector<Product> results = catalogService.searchByCategory(category);
+
+                if (results.empty()) {
+                    std::cout << "No se encontraron productos en esa categoria." << std::endl;
+                } else {
+                    std::cout << "\nProductos encontrados:" << std::endl;
+                    for (const Product& product : results) {
+                        catalogService.displayProduct(product);
+                    }
+                }
+
                 break;
+            }
             case 6: {
                 std::string startDate, endDate;
                 std::cout << "Ingrese fecha de inicio (YYYY-MM-DD): ";

@@ -21,4 +21,6 @@ add_executable(supermarket_catalog src/main.cpp
         src/utils/CSVLoader.cpp
         include/structures/BTree.h
         src/structures/BTree.cpp
+        include/structures/BPlusTree.h
+        src/structures/BPlusTree.cpp
 )
