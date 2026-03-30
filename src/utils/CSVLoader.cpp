@@ -16,6 +16,9 @@ std::vector<Product> CSVLoader::loadProducts(const std::string &filePath) {
         return products;
     }
 
+    int validCount = 0;
+    int skippedCount = 0;
+
     std::string line;
 
     // Skip header line
@@ -38,6 +41,13 @@ std::vector<Product> CSVLoader::loadProducts(const std::string &filePath) {
             fields.push_back(token);
         }
 
+        // Validate field count
+        if (fields.size() < 7) {
+            std::cout << "Fila inválida (campos insuficientes): " << line << std::endl;
+            skippedCount++;
+            continue;
+        }
+
         // Build Product from parsed feilds
         Product product;
         product.name = fields[0];
@@ -53,12 +63,17 @@ std::vector<Product> CSVLoader::loadProducts(const std::string &filePath) {
         } catch (...) {
             // If it fails, skip this row
             std::cout << "Error al convertir datos numéricos: " << line << std::endl;
+            skippedCount++;
             continue;
         }
 
         // Add valid product to result list
         products.push_back(product);
+        validCount++;
     }
+
+    std::cout << "Productos válidos cargados: " << validCount << std::endl;
+    std::cout << "Filas omitidas: " << skippedCount << std::endl;
 
     file.close();
     return products;

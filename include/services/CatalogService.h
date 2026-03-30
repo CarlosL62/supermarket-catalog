@@ -19,7 +19,7 @@ private:
 public:
     CatalogService();
 
-    bool addProduct(const Product& product);
+    bool addProduct(const Product& product, bool showMessage);
     bool deleteProductByBarcode(const std::string& barcode);
 
     Product* searchByName(const std::string& name);

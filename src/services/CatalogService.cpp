@@ -3,15 +3,16 @@
 
 CatalogService::CatalogService() = default;
 
-bool CatalogService::addProduct(const Product& product) {
+bool CatalogService::addProduct(const Product& product, bool showMessage) {
     unorderedList.insert(product);
     orderedList.insert(product);
     hashTable.insert(product);
     avlTree.insert(product);
     bTree.insert(product);
     bPlusTree.insert(product);
-    std::cout << "Producto agregado correctamente." << std::endl;
-    // displayProduct(product);
+    if (showMessage) {
+        std::cout << "Producto agregado correctamente." << std::endl;
+    }
     return true;
 }
 
@@ -77,12 +78,17 @@ void CatalogService::loadFromCSV(const std::string& filePath) {
     // Load products from CSV using CSVLoader
     std::vector<Product> products = CSVLoader::loadProducts(filePath);
 
-    // Insert each product into all structures
-    for (const Product& product : products) {
-        addProduct(product);
+    if (products.empty()) {
+        std::cout << "No se cargaron productos desde el CSV." << std::endl;
+        return;
     }
 
-    std::cout << "Productos cargados desde CSV correctamente." << std::endl;
+    // Insert each product into all structures without printing one by one
+    for (const Product& product : products) {
+        addProduct(product, false);
+    }
+
+    std::cout << "Productos cargados correctamente." << std::endl;
     std::cout << "Total de productos cargados: " << products.size() << std::endl;
 }
 
