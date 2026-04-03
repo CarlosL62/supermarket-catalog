@@ -289,16 +289,24 @@ void AVLTree::generateDotFile(const std::string &filePath) const {
     file << "}" << std::endl;
     file.close();
 
-    // Generate PNG using Graphviz
     std::string pngPath = filePath.substr(0, filePath.find_last_of('.')) + ".png";
-    std::string command = "dot -Tpng " + filePath + " -o " + pngPath;
-    system(command.c_str());
+    std::string svgPath = filePath.substr(0, filePath.find_last_of('.')) + ".svg";
 
-    int result = system(command.c_str());
+    std::string pngCommand = "dot -Tpng \"" + filePath + "\" -o \"" + pngPath + "\"";
+    int pngResult = system(pngCommand.c_str());
 
-    if (result != 0) {
+    if (pngResult != 0) {
         std::cout << "Generación fallida del PNG AVL_Tree. Asegurese de tener instalado Graphviz" << std::endl;
     } else {
         std::cout << "Generación exitosa del PNG AVL_Tree en: " << pngPath << std::endl;
+    }
+
+    std::string svgCommand = "dot -Tsvg \"" + filePath + "\" -o \"" + svgPath + "\"";
+    int svgResult = system(svgCommand.c_str());
+
+    if (svgResult != 0) {
+        std::cout << "Generación fallida del SVG AVL_Tree. Asegurese de tener instalado Graphviz" << std::endl;
+    } else {
+        std::cout << "Generación exitosa del SVG AVL_Tree en: " << svgPath << std::endl;
     }
 }

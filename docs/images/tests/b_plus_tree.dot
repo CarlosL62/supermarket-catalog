@@ -1,0 +1,20 @@
+digraph BPlusTree {
+    rankdir=TB;
+    node [fontname="Arial"];
+    node4347565184 [shape=box, label="Granos"];
+    node4347558752 [shape=box, label="Frutas"];
+    node4347558656 [shape=box, label="Bebidas | Despensa"];
+    node4347564128 [shape=box, label="Frutas"];
+    node4347565280 [shape=box, label="Lacteos"];
+    node4347563328 [shape=box, label="Granos"];
+    node4347565664 [shape=box, label="Lacteos | Panaderia"];
+    node4347565184 -> node4347558752;
+    node4347565184 -> node4347565280;
+    node4347558752 -> node4347558656;
+    node4347558752 -> node4347564128;
+    node4347558656 -> node4347564128 [style=dashed, color=blue, constraint=false];
+    node4347564128 -> node4347563328 [style=dashed, color=blue, constraint=false];
+    node4347565280 -> node4347563328;
+    node4347565280 -> node4347565664;
+    node4347563328 -> node4347565664 [style=dashed, color=blue, constraint=false];
+}

@@ -1,0 +1,106 @@
+@startuml
+
+class Product {
+  +string name
+  +string barcode
+  +string category
+  +string expiryDate
+  +string brand
+  +double price
+  +int stock
+}
+
+class CatalogService {
+  -UnorderedLinkedList unorderedList
+  -OrderedLinkedList orderedList
+  -HashTable hashTable
+  -AVLTree avlTree
+  -BTree bTree
+  -BPlusTree bPlusTree
+
+  +bool addProduct(product, showMessage)
+  +bool deleteProductByBarcode(barcode)
+  +Product searchByName(name)
+  +Product searchByBarcode(barcode)
+  +List<Product> searchByCategory(category)
+  +List<Product> searchByExpiryDateRange(startDate, endDate)
+  +void listProductsByName()
+  +void loadFromCSV(filePath)
+  +void compareSearchPerformance()
+  +void compareInsertionPerformance()
+  +void compareDeletionPerformance()
+  +void compareAllPerformance()
+  +void generateTreeVisualizations()
+  +void displayProduct(product)
+}
+
+class CSVLoader {
+  +List<Product> loadProducts(filePath)
+}
+
+class BaseLinkedList {
+  -head
+  +bool removeByBarcode(barcode)
+  +Product searchByName(name)
+  +Product searchByBarcode(barcode)
+}
+
+class UnorderedLinkedList {
+  +void insert(product)
+}
+
+class OrderedLinkedList {
+  +void insert(product)
+}
+
+class HashTable {
+  +void insert(product)
+  +Product search(barcode)
+  +void remove(barcode)
+}
+
+class AVLTree {
+  +void insert(product)
+  +Product search(name)
+  +void remove(name)
+  +void inorderTraversal()
+  +void generateDotFile(filePath)
+}
+
+class BTree {
+  +void insert(product)
+  +Product search(expiryDate)
+  +List<Product> searchByRange(startDate, endDate)
+  +void remove(expiryDate)
+  +void generateDotFile(filePath)
+}
+
+class BPlusTree {
+  +void insert(product)
+  +List<Product> search(category)
+  +void remove(product)
+  +void generateDotFile(filePath)
+}
+
+' Herencia
+UnorderedLinkedList --|> BaseLinkedList
+OrderedLinkedList --|> BaseLinkedList
+
+' Relaciones principales
+CatalogService --> UnorderedLinkedList
+CatalogService --> OrderedLinkedList
+CatalogService --> HashTable
+CatalogService --> AVLTree
+CatalogService --> BTree
+CatalogService --> BPlusTree
+CatalogService ..> CSVLoader
+
+' Dependencias con Product
+CSVLoader ..> Product
+BaseLinkedList ..> Product
+HashTable ..> Product
+AVLTree ..> Product
+BTree ..> Product
+BPlusTree ..> Product
+
+@enduml

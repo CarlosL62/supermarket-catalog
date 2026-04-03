@@ -1,0 +1,53 @@
+@startuml
+
+title TAD - Árbol B+
+
+class BPlusTree {
+  -Node root
+  -int order
+
+  +insert(product)
+  +search(category)
+  +remove(product)
+  +generateDotFile(filePath)
+}
+
+class Node {
+  -List<string> keys
+  -List<List<Product>> values
+  -List<Node> children
+  -bool isLeaf
+  -Node next
+}
+
+class Product {
+  +string name
+  +string barcode
+  +string category
+  +string expiryDate
+  +string brand
+  +double price
+  +int stock
+}
+
+BPlusTree "1" --> "1" Node : root
+Node "1" --> "*" Product : values
+Node "1" --> "*" Node : children
+Node "1" --> "0..1" Node : next
+
+note right of BPlusTree
+Estructura:
+- Árbol balanceado de múltiples caminos
+- Los datos se almacenan en hojas
+- Las hojas están enlazadas entre sí
+
+Operaciones:
+- insert(product) -> O(log n)
+- search(category) -> O(log n)
+- remove(product) -> O(log n)
+
+Uso en el sistema:
+- Búsqueda por categoría
+end note
+
+@enduml

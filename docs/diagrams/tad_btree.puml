@@ -1,0 +1,52 @@
+@startuml
+
+title TAD - Árbol B
+
+class BTree {
+  -Node root
+  -int order
+
+  +insert(product)
+  +search(expiryDate)
+  +searchByRange(startDate, endDate)
+  +remove(expiryDate)
+  +generateDotFile(filePath)
+}
+
+class Node {
+  -List<Product> keys
+  -List<Node> children
+  -bool isLeaf
+}
+
+class Product {
+  +string name
+  +string barcode
+  +string category
+  +string expiryDate
+  +string brand
+  +double price
+  +int stock
+}
+
+BTree "1" --> "1" Node : root
+Node "1" --> "*" Product : keys
+Node "1" --> "*" Node : children
+
+note right of BTree
+Estructura:
+- Árbol balanceado de múltiples caminos
+- Cada nodo contiene múltiples claves
+- Optimizado para operaciones en disco
+
+Operaciones:
+- insert(product) -> O(log n)
+- search(expiryDate) -> O(log n)
+- searchByRange(...) -> O(log n + k)
+- remove(expiryDate) -> O(log n)
+
+Uso en el sistema:
+- Búsqueda por rango de fechas
+end note
+
+@enduml

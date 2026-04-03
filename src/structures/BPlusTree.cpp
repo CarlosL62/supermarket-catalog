@@ -292,12 +292,23 @@ void BPlusTree::generateDotFile(const std::string& filePath) const {
     file.close();
 
     std::string pngPath = filePath.substr(0, filePath.find_last_of('.')) + ".png";
-    std::string command = "dot -Tpng \"" + filePath + "\" -o \"" + pngPath + "\"";
-    int result = system(command.c_str());
+    std::string svgPath = filePath.substr(0, filePath.find_last_of('.')) + ".svg";
 
-    if (result != 0) {
+    std::string pngCommand = "dot -Tpng \"" + filePath + "\" -o \"" + pngPath + "\"";
+    int pngResult = system(pngCommand.c_str());
+
+    if (pngResult != 0) {
         std::cout << "Generación fallida del PNG B+ Tree. Asegurese de tener instalado Graphviz" << std::endl;
     } else {
         std::cout << "Generación exitosa del PNG B+ Tree en: " << pngPath << std::endl;
+    }
+
+    std::string svgCommand = "dot -Tsvg \"" + filePath + "\" -o \"" + svgPath + "\"";
+    int svgResult = system(svgCommand.c_str());
+
+    if (svgResult != 0) {
+        std::cout << "Generación fallida del SVG B+ Tree. Asegurese de tener instalado Graphviz" << std::endl;
+    } else {
+        std::cout << "Generación exitosa del SVG B+ Tree en: " << svgPath << std::endl;
     }
 }

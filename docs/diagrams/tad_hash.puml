@@ -1,0 +1,41 @@
+@startuml
+
+title TAD - Tabla Hash
+
+class HashTable {
+  -vector<list<Product>> table
+  -int capacity
+  -int hashFunction(key)
+
+  +insert(product)
+  +search(barcode)
+  +remove(barcode)
+}
+
+class Product {
+  +string name
+  +string barcode
+  +string category
+  +string expiryDate
+  +string brand
+  +double price
+  +int stock
+}
+
+HashTable "1" --> "*" Product : stores
+
+note right of HashTable
+Estructura:
+- Tabla de dispersión
+- Manejo de colisiones por encadenamiento
+
+Operaciones:
+- insert(product) -> O(1)
+- search(barcode) -> O(1)
+- remove(barcode) -> O(1)
+
+Uso en el sistema:
+- Búsqueda por código de barras
+end note
+
+@enduml

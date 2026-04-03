@@ -1,0 +1,51 @@
+@startuml
+
+title TAD - Árbol AVL
+
+class AVLTree {
+  -Node root
+
+  +insert(product)
+  +search(name)
+  +remove(name)
+  +inorderTraversal()
+  +generateDotFile(filePath)
+}
+
+class Node {
+  -Product data
+  -Node left
+  -Node right
+  -int height
+}
+
+class Product {
+  +string name
+  +string barcode
+  +string category
+  +string expiryDate
+  +string brand
+  +double price
+  +int stock
+}
+
+AVLTree "1" --> "1" Node : root
+Node "1" --> "1" Product : contains
+Node "1" --> "0..1" Node : left
+Node "1" --> "0..1" Node : right
+
+note right of AVLTree
+Estructura:
+- Árbol binario balanceado
+- Mantiene equilibrio mediante rotaciones
+
+Operaciones:
+- insert(product) -> O(log n)
+- search(name) -> O(log n)
+- remove(name) -> O(log n)
+
+Uso en el sistema:
+- Búsqueda por nombre
+end note
+
+@enduml

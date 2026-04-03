@@ -1,0 +1,47 @@
+@startuml
+
+title TAD - Lista Enlazada Base
+
+class BaseLinkedList {
+  -Node head
+  +insert(product)
+
+  +removeByBarcode(barcode)
+  +searchByName(name)
+  +searchByBarcode(barcode)
+}
+
+class Node {
+  -Product data
+  -Node next
+}
+
+class Product {
+  +string name
+  +string barcode
+  +string category
+  +string expiryDate
+  +string brand
+  +double price
+  +int stock
+}
+
+BaseLinkedList "1" --> "1" Node : head
+Node "1" --> "1" Product : contains
+Node "1" --> "0..1" Node : next
+
+note right of BaseLinkedList
+Estructura:
+- Lista enlazada simple
+- Cada nodo apunta al siguiente
+
+Operaciones:
+- insert(product) -> O(1) / O(n)
+- search -> O(n)
+- remove -> O(n)
+
+Uso en el sistema:
+- Base para listas ordenadas y no ordenadas
+end note
+
+@enduml
