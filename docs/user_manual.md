@@ -112,9 +112,28 @@ Muestra todos los productos ordenados alfabéticamente.
 
 ### 4.8 Comparar rendimiento
 
-(En desarrollo)
+Permite comparar el rendimiento de búsqueda entre distintas estructuras de datos.
 
-Permite visualizar diferencias de rendimiento entre estructuras.
+El sistema mide el tiempo promedio (en microsegundos) utilizando:
+- N consultas por prueba
+- M repeticiones de cada prueba
+
+Se evalúan los siguientes casos:
+- Búsquedas exitosas
+- Búsquedas fallidas
+- Búsquedas en extremos (primer y último elemento)
+
+Estructuras comparadas:
+- Lista enlazada no ordenada
+- Lista enlazada ordenada
+- Árbol AVL
+- Tabla hash
+
+Para obtener resultados representativos, se recomienda:
+- Cargar previamente un archivo CSV (ej. `products_1000.csv`)
+- Ejecutar esta opción después de cargar datos
+
+El sistema mostrará los tiempos promedio por estructura y un resumen teórico de complejidad.
 
 ---
 

@@ -11,7 +11,8 @@ private:
 
     int hashFunction(const std::string& barcode);
 public:
-    HashTable(int size = 101);
+    // Prime odd capacity (>1000) to support 1000+ products and reduce hash collisions.
+    HashTable(int size = 1501);
 
     bool insert(const Product& product);
     Product* search(const std::string& barcode);

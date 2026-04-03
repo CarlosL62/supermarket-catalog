@@ -166,7 +166,7 @@ int main() {
                 catalogService.listProductsByName();
                 break;
             case 8:
-                std::cout << "Opcion aun no implementada." << std::endl;
+                catalogService.compareSearchPerformance();
                 break;
             case 9: {
                 std::string filePath;

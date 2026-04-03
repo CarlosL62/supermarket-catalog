@@ -9,13 +9,15 @@ Este proyecto implementa un sistema de gestión de productos de supermercado uti
 ## 2. Objetivos
 
 ### Objetivo general
+
 Desarrollar un sistema eficiente de gestión de productos utilizando múltiples estructuras de datos.
 
 ### Objetivos específicos
-- Implementar estructuras de datos desde cero
-- Optimizar búsquedas según el tipo de consulta
-- Garantizar consistencia entre estructuras
-- Analizar complejidad temporal (Big-O)
+
+-   Implementar estructuras de datos desde cero
+-   Optimizar búsquedas según el tipo de consulta
+-   Garantizar consistencia entre estructuras
+-   Analizar complejidad temporal (Big-O)
 
 ---
 
@@ -25,9 +27,9 @@ El sistema mantiene múltiples estructuras en paralelo. Cada vez que se inserta 
 
 ### Flujo general:
 
-1. Se ingresa un producto
-2. Se inserta en todas las estructuras
-3. Se realizan búsquedas específicas según la estructura
+1.  Se ingresa un producto
+2.  Se inserta en todas las estructuras
+3.  Se realizan búsquedas específicas según la estructura
 
 ### Interfaz del sistema
 
@@ -61,61 +63,70 @@ Los siguientes diagramas representan la estructura abstracta de datos (TAD) de c
 
 ![TAD B+ Tree](images/diagrams/tad_bplustree.png)
 
-
 ---
 
 ## 4. Estructuras implementadas
 
 ### 4.1 Lista enlazada no ordenada
-- Uso: almacenamiento básico
-- Complejidad:
-  - Búsqueda: O(n)
-  - Inserción: O(1)
+
+-   Uso: almacenamiento básico
+-   Complejidad:
+    -   Búsqueda: O(n)
+    -   Inserción: O(1)
 
 ### 4.2 Lista enlazada ordenada
-- Uso: mantener orden alfabético
-- Complejidad:
-  - Búsqueda: O(n)
-  - Inserción: O(n)
+
+-   Uso: mantener orden alfabético
+-   Complejidad:
+    -   Búsqueda: O(n)
+    -   Inserción: O(n)
 
 ### 4.3 Tabla hash
-- Uso: búsqueda por código de barras
-- Complejidad:
-  - Búsqueda: O(1) promedio
-  - Inserción: O(1)
+
+-   Uso: búsqueda por código de barras
+-   Complejidad:
+    -   Búsqueda: O(1) promedio
+    -   Inserción: O(1)
 
 ### 4.4 Árbol AVL
-- Uso: búsqueda por nombre
-- Complejidad:
-  - Búsqueda: O(log n)
-  - Inserción: O(log n)
+
+-   Uso: búsqueda por nombre
+-   Complejidad:
+    -   Búsqueda: O(log n)
+    -   Inserción: O(log n)
 
 ### 4.5 Árbol B
-- Uso: búsqueda por rango de fechas
-- Complejidad:
-  - Búsqueda: O(log n)
-  - Inserción: O(log n)
+
+-   Uso: búsqueda por rango de fechas
+-   Complejidad:
+    -   Búsqueda: O(log n)
+    -   Inserción: O(log n)
 
 ### 4.6 Árbol B+
-- Uso: búsqueda por categoría
-- Complejidad:
-  - Búsqueda: O(log n)
+
+-   Uso: búsqueda por categoría
+-   Complejidad:
+    -   Búsqueda: O(log n)
 
 ---
 
 ## 5. Operaciones principales
 
 ### Inserción
+
 Se inserta el producto en todas las estructuras.
 
 ### Búsqueda
+
 Dependiendo del tipo de búsqueda:
-- Nombre → AVL
-- Código → Hash
-- Categoría → B+
-- Fecha → B-Tree
+
+-   Nombre → AVL
+-   Código → Hash
+-   Categoría → B+
+-   Fecha → B-Tree
 
 ### Eliminación
+
 Se elimina el producto en todas las estructuras para mantener consistencia.
 
 ---
@@ -125,9 +136,10 @@ Se elimina el producto en todas las estructuras para mantener consistencia.
 El sistema permite cargar productos desde un archivo CSV.
 
 Características:
-- Validación de campos
-- Manejo de errores
-- Conteo de registros válidos y omitidos
+
+-   Validación de campos
+-   Manejo de errores
+-   Conteo de registros válidos y omitidos
 
 ### Ejemplo de carga de CSV
 
@@ -138,9 +150,10 @@ Características:
 ## 7. Visualización
 
 Se generan archivos .dot y .png utilizando Graphviz para:
-- Árbol AVL
-- Árbol B
-- Árbol B+
+
+-   Árbol AVL
+-   Árbol B
+-   Árbol B+
 
 ### Generación de visualizaciones
 
@@ -150,67 +163,166 @@ Se generan archivos .dot y .png utilizando Graphviz para:
 
 ## 8. Análisis de complejidad
 
-| Estructura           | Búsqueda   | Inserción   | Eliminación   |
-|----------------------|------------|-------------|--------------|
-| Lista no ordenada    | O(n)       | O(1)        | O(n)         |
-| Lista ordenada       | O(n)       | O(n)        | O(n)         |
-| Hash                 | O(1)       | O(1)        | O(1)         |
-| AVL                  | O(log n)   | O(log n)    | O(log n)     |
-| B-Tree               | O(log n)   | O(log n)    | O(log n)     |
-| B+ Tree              | O(log n)   | O(log n)    | O(log n)     |
+Estructura
+
+Búsqueda
+
+Inserción
+
+Eliminación
+
+Lista no ordenada
+
+O(n)
+
+O(1)
+
+O(n)
+
+Lista ordenada
+
+O(n)
+
+O(n)
+
+O(n)
+
+Hash
+
+O(1)
+
+O(1)
+
+O(1)
+
+AVL
+
+O(log n)
+
+O(log n)
+
+O(log n)
+
+B-Tree
+
+O(log n)
+
+O(log n)
+
+O(log n)
+
+B+ Tree
+
+O(log n)
+
+O(log n)
+
+O(log n)
 
 ---
 
 ## 9. Pruebas realizadas
 
 Se realizaron pruebas con:
-- Dataset pequeño (7 productos)
-- Dataset grande (1000 productos)
+
+-   Dataset pequeño (7 productos)
+-   Dataset grande (1000 productos)
 
 Se validó:
-- Correcta inserción
-- Consistencia entre estructuras
-- Eliminación completa
-- Búsquedas correctas
+
+-   Correcta inserción
+-   Consistencia entre estructuras
+-   Eliminación completa
+-   Búsquedas correctas
 
 A continuación se muestran las visualizaciones generadas a partir del dataset `/data/products_1000.csv`:
 
 #### Árbol AVL
+
 ![AVL Tree](images/tests/avl_tree.svg)
 
 #### Árbol B
+
 ![B-Tree](images/tests/b_tree.svg)
 
 #### Árbol B+
+
 ![B+ Tree](images/tests/b_plus_tree.svg)
 
 Recursos generados almacenados en:
-- `images/tests/`
+
+-   `images/tests/`
+
 ---
 
-## 10. Resultados
+---
+
+## 10. Medición de rendimiento
+
+Se realizó una comparación de rendimiento de las operaciones de búsqueda entre las distintas estructuras de datos implementadas.
+
+### Metodología
+
+Para garantizar resultados representativos, se utilizó el siguiente enfoque:
+
+-   N consultas por prueba: 20
+-   M repeticiones por prueba: 5
+-   Unidad de medida: microsegundos (µs)
+
+Se evaluaron los siguientes escenarios:
+
+-   Búsquedas exitosas
+-   Búsquedas fallidas
+-   Búsquedas en extremos (primer y último elemento)
+
+Las pruebas se ejecutaron utilizando el dataset de 1000 productos cargado desde CSV.
+
+### Resultados obtenidos
+
+![Comparación de rendimiento de búsqueda](images/searchPerformanceResults.png)
+
+| Estructura           | Tiempo promedio (µs) |
+|----------------------|----------------------|
+| Lista no ordenada    | 25.84 - 36.86        |
+| Lista ordenada       | 17.26 - 26.79        |
+| Árbol AVL            | 0.99 - 1.52          |
+| Hash                 | 0.17 - 0.23          |
+
+### Análisis
+
+Los resultados muestran que:
+
+-   La tabla hash mantiene tiempos constantes, aunque ligeramente superiores en este entorno debido al costo del cálculo del hash y el tamaño reducido de las pruebas.
+-   El árbol AVL presenta un comportamiento consistente con su complejidad O(log n).
+-   Las listas enlazadas presentan tiempos bajos en pruebas pequeñas, pero su crecimiento es lineal O(n).
+
+Es importante notar que en conjuntos de datos más grandes, las diferencias entre estructuras se vuelven más significativas.
+
+---
+
+## 11. Resultados
 
 El sistema mostró un mejor rendimiento dependiendo del tipo de operación:
 
-- La tabla hash presentó el mejor desempeño en búsquedas por código de barras debido a su complejidad O(1) en promedio.
-- El árbol AVL ofreció un desempeño eficiente y balanceado para búsquedas por nombre, garantizando O(log n).
-- El árbol B+ permitió búsquedas eficientes por categoría, facilitando además recorridos secuenciales gracias a la estructura enlazada de sus nodos hoja.
+-   La tabla hash presentó el mejor desempeño en búsquedas por código de barras debido a su complejidad O(1) en promedio.
+-   El árbol AVL ofreció un desempeño eficiente y balanceado para búsquedas por nombre, garantizando O(log n).
+-   El árbol B+ permitió búsquedas eficientes por categoría, facilitando además recorridos secuenciales gracias a la estructura enlazada de sus nodos hoja.
 
 En contraste, las listas enlazadas presentaron menor eficiencia en búsquedas debido a su complejidad O(n), siendo utilizadas principalmente como estructuras base.
 
 ---
 
-## 11. Conclusiones
+## 12. Conclusiones
 
-- El uso de múltiples estructuras mejora significativamente el rendimiento
-- Cada estructura es óptima para un tipo de operación
-- La sincronización entre estructuras es clave
+-   El uso de múltiples estructuras mejora significativamente el rendimiento
+-   Cada estructura es óptima para un tipo de operación
+-   La sincronización entre estructuras es clave
 
 ---
 
-## 12. Limitaciones
+## 13. Limitaciones
 
-- No se implementa rebalanceo completo en B+ Tree
-- No se incluye persistencia en base de datos
+-   No se implementa rebalanceo completo en B+ Tree
+-   No se incluye persistencia en base de datos
 
 ---
